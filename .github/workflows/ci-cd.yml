@@ -6,6 +6,7 @@ on:
 
 jobs:
   test:
+    name: Run tests
     runs-on: ubuntu-latest
 
     steps:
@@ -23,9 +24,11 @@ jobs:
       - name: Run tests
         run: pytest
 
+
   build:
-    needs: test
+    name: Build Docker image
     runs-on: ubuntu-latest
+    needs: test 
 
     steps:
       - name: Checkout
@@ -34,11 +37,13 @@ jobs:
       - name: Build Docker image
         run: docker build -t fastapi-demo .
 
+
   deploy:
-    needs: build
+    name: Deploy application
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
-      - name: Fake deploy
+      - name: Simulate deploy
         run: echo "Deploy uspešan!"
 
