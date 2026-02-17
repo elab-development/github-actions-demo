@@ -39,11 +39,20 @@ jobs:
 
 
   deploy:
-    name: Deploy application
-    runs-on: ubuntu-latest
+    name: Deploy to local machine
+    runs-on: self-hosted
     needs: build
 
     steps:
-      - name: Simulate deploy
-        run: echo "Deploy uspešan!"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build image locally
+        run: docker build -t fastapi-demo .
+
+      - name: Restart container
+        run: |
+          docker stop fastapi-demo || true
+          docker rm fastapi-demo || true
+          docker run -d -p 8000:8000 --name fastapi-demo fastapi-demo
 
