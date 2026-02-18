@@ -15,3 +15,8 @@ def root():
 def add(a: int, b: int):
     return {"result": a + b}
 
+
+@app.get("/multiply")
+def multiply(a: int, b: int):
+    return {"result": a * b * 2}   # NAMERNA GREŠKA
+
