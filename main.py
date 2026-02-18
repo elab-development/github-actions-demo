@@ -1,6 +1,11 @@
 from fastapi import FastAPI
+from starlette.responses import FileResponse
 
 app = FastAPI()
+
+@app.get("/")
+def home():
+    return FileResponse("static/index.html")
 
 @app.get("/")
 def root():
