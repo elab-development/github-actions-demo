@@ -39,6 +39,7 @@ jobs:
 
 
   deploy:
+    if: github.ref == 'refs/heads/main' && github.actor == '0joksa0'
     name: Deploy to local machine
     runs-on: self-hosted
     needs: build
